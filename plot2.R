@@ -6,8 +6,8 @@ plotMe <- function( workingDirectory ){
 				tidy <- data[( as.Date( data$Date, "%d/%m/%Y") == "2007-02-01" |  as.Date( data$Date, "%d/%m/%Y") == "2007-02-02"),]
 				tidy$dt <- paste(tidy$Date, tidy$Time)
 				tidy$newdt <- strptime( tidy$dt, "%d/%m/%Y %H:%M:%S")
-				with( tidy, plot( newdt, Global_active_power, type="n", xlab="", ylab="Global active power(kilowatts)"))
+				png("plot2.png")
+				with( tidy, plot( newdt, Global_active_power, type="n", xlab="", ylab="Global Active Power(kilowatts)"))
 				with(tidy, lines( newdt, Global_active_power, type="S"))
-				dev.copy( png, "plot2.png")
 				dev.off()
 }

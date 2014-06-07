@@ -9,12 +9,11 @@ plotMe <- function( workingDirectory ){
 				melted <- melt( tidy, id=c("dt" ), measure.var=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 				melted$date <- strptime( melted$dt, "%d/%m/%Y %H:%M:%S")
 				
+				png( "plot3.png")
 				with(melted, plot( date, value, type="n", xlab="", ylab="Energy sub metering"))
 				with(subset( melted, variable=="Sub_metering_1"), lines(date, value, type="S"))
 				with(subset( melted, variable=="Sub_metering_2"), lines(date, value, type="S", col="red"))
 				with(subset( melted, variable=="Sub_metering_3"), lines(date, value, type="S", col="blue"))
-				legend("topright", col=c("black", "red", "blue"), pch="-", legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-				
-				dev.copy( png, "plot3.png", width=760, height=760)
+				legend("topright", col=c("black", "red", "blue"), lty=c(1,1), legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 				dev.off()
 }
